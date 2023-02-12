@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+{% include '/components/head.html' %}
+
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+    <div class="container">
+    </div>
+</div>
+
+<head>
+    <style>
+        .containerHead {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include '/components/menubar.html' %}
+    <!--
+    <form action="/informe" method="get">
+        <td> <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                style="background-color: #1A5276"
+                role="button" value="none">Descargar Informe</a>
+    </form>
+-->
+    <div class="container">
+        <br>
+        <div>
+            <form action="/filtrarAlarmas" method='POST' name="myform">
+
+                <div style="margin-top: 1%; margin-bottom: 0.5%; margin-left: 0.3%;">
+                    <label style="color: white; font-size: 50px; font-weight: bold;">Filtros</label>
+                </div>
+
+                <div class="containerHead">
+                    <div style="margin-top: 1%; width: 20%;">
+                        <label style="color: white;">Filtrar por alerta </label>
+                        <select name=alertTypes method="GET" action="/">
+                            <option value="" {% if selected_option=="" %} SELECTED {% endif %}></option>"
+                            <option value="disconnection_alert" {% if selected_option=="disconnection_alert" %} SELECTED
+                                {% endif %}>Desconexión</option>"
+                            <option value="wifi_alert" {% if selected_option=="wifi_alert" %} SELECTED {% endif %}>Wifi
+                            </option>"
+                            <option value="ethernet_alert" {% if selected_option=="ethernet_alert" %} SELECTED {% endif
+                                %}>Ethernet</option>"
+                            <option value="hardDisk_alert" {% if selected_option=="hardDisk_alert" %} SELECTED {% endif
+                                %}>Disco Duro HDD</option>"
+                        </select>
+                    </div>
+                    <div style="margin-top: 0.3%; width: 80%;">
+                        <div class="containerHead" style="margin-left: 25%;">
+                            <div style="margin-top: 1%;">
+                                <label style="color: white;">Filtrar por fechas </label>
+                            </div>
+                            <div class="containerHead" style="margin-left: 1%; margin-top: 1%; width: 75%;">
+                                <div style="color: white;">
+                                    {{ form.csrt_token }}
+                                    {{ form.startdate.label }} {{form.startdate(class='datepicker')}}
+                                    {{form.hidden_tag()}}
+                                    {{ form.enddate.label }} {{form.enddate(class='datepicker')}} {{form.hidden_tag()}}
+                                </div>
+                                <div style="margin-left: 90%; margin-top: -6.5%;">
+
+                                    <input type="submit"
+                                        class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                                        style="background-color: #1A5276" value="FILTRAR">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="containerHead" style="margin-top: 3%;">
+            <div style="width: 50%;">
+                <label style="color: white; font-size: 50px; font-weight: bold;">Alertas</label>
+            </div>
+            <div style="width: 50%; margin-top: 1.5%; text-align: end;">
+                <form action="/descargarPDF" method="get">
+                    <td> <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                            style="background-color: #1A5276; height: 45px; padding-top: 1.5%;" href="{{ url_for( 'DescargarPDF')}}" role="button"
+                            value="none">DESCARGAR INFORME </a>
+                </form>
+
+            </div>
+        </div>
+        <table class="table bg-white font-monospace">
+
+            <thead>
+                <tr>
+                    <th>FECHA</th>
+                    <th>HORA</th>
+                    <th>MÁQUINA</th>
+                    <th>NIVEL</th>
+                    <th>IP</th>
+                    <th>MENSAJE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alarma in alarmas %}
+                <tr class="row1">
+                    <td>{{ alarma.1}}</td>
+                    <td>{{ alarma.2}}</td>
+                    <td>{{ alarma.3}}</td>
+                    {% if alarma.4 == "Crítico"%}
+                    <td style="color: #fff; background-color: #DF0E0E; font-weight: bolder;">{{ alarma.4}}</td>
+                    {% else %}
+                    <td style="color: #fff;background-color: #EE9D3C; font-weight: bolder;">{{alarma.4}}</td>
+                    {% endif %}
+                    <td>{{ alarma.5}}</td>
+                    <td>{{ alarma.7}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+</html>

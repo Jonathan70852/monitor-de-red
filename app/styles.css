@@ -1,0 +1,9 @@
+td {
+    border: 2px dotted blue;
+}
+tr.row1 td {
+    padding-top: 40px;
+}
+
+.example { background-color: rgb(255, 255, 255); } 
+

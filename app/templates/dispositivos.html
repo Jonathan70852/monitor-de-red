@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+{% include '/components/head.html' %}
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+    <div class="container">
+    </div>
+</div>
+
+<head>
+    <style>
+        .containerHead {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+
+<body>
+    {% include '/components/menubar.html' %}
+
+    <div class="container">
+        <div class="scanner">
+
+            <form action="/livehost-result" method="post" style="margin-top: 3%; margin-bottom: 5%;">
+                <div style="margin-top: 1%; margin-bottom: 0.5%; margin-left: 0.3%;">
+                    <label style="color: white;">Ingrese la red principal</label>
+                </div>
+                <div class="containerHead">
+                    <div style="margin-right: 1%;">
+                        <input class="form-control" type="text" style="width:360px;height:50px" name="url"
+                            placeholder="Rango de la red principal (e.j: 192.198.0-X.0-X)">
+                            <p style="color: white;"> Mientras el rango de busqueda sea mayor, el tiempo de busqueda incrementará.</p>
+                    
+                    
+                        <input type="submit" class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                        style="background-color: #1A5276" value="BUSCAR">
+                        </div>
+                </div>
+            </form>
+            <div>
+                <label style="color: white; font-size: 50px; font-weight: bold;">Dispositivos conectados a la red</label>
+            </div>
+            <table class="table bg-white font-monospace">
+
+                <thead>
+                    <tr>
+                        
+                        <th>IP</th>
+                        <th>HOSTNAME</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        
+                        <td>{{ usuario.1}}</td>
+                        <td>{{ usuario.2}}</td>
+
+                        <form action="/informe" method="get">
+                            <td> <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                                    style="background-color: #1A5276"
+                                    href="{{ url_for( 'Informes', id_dispositivo = usuario.0)}}" role="button"
+                                    value="none">Información </a>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

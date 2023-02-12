@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <style>
+            .float-parent-element {
+                width: 100%;
+            }
+            .float-child-element {
+                float: left;
+                width: 50%;
+            }
+            .left{
+                margin-left: 3%;
+            }
+            .right{
+                float: left;
+                margin-left: 22%;
+            }
+            .section {
+
+                float: left;
+                width: 100%;
+
+            }
+        </style>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/Cubo.ico')}}">
+    <div class="float-parent-element" style="margin-top: 1%;">
+        <div class="float-child-element">
+            <div class="left"> 
+                <img src ="https://jorzgz0iptpc.cdn.shift8web.com/wp-content/uploads/2018/01/LOGO-UISRAEL-768x209.png" width="300" height="70" align="left up" >
+            </div> 
+        </div>
+        <div>
+            <div class="right">
+            <h2 class="display-3">Net-Cube <img src="{{ url_for('static', filename = 'img/Cubo.png')}}" width="70" height="70"></h2> 
+            </div>
+        </div>
+    </div>   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    {# <link rel = "stylesheet" href="{{ url_for('static', filename = 'css/base1.css')}}"> #}
+
+     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.1/css/bulma.min.css"> 
+
+</head>
+
+<body>
+    
+    <section class="section">
+        <div class="columns">
+            <div class="column is-one-third is-offset-one-third">
+                <h1 class="is-size-1">Bienvenido</h1>
+                <form action="{{url_for('hacer_login')}}" method="post">
+                    <label for="correo">Usuario</label>
+                    <div class="control">
+                        <input autofocus required class="input" placeholder="Usuario" id="correo"
+                            name="correo">
+                    </div>
+                    <div class="control">
+                        <label for="palabra_secreta">Contraseña</label>
+                        <input required type="password" class="input" placeholder="Contraseña" id="palabra_secreta"
+                            name="palabra_secreta">
+                    </div>
+
+                    <div style="display: flex; justify-content: center; margin-top: 4%;">
+                        <button class="button is-success mt-2" style="width: 50%; font-weight: bold;">Entrar</button>
+
+                    </div>
+
+                    {# Mostrar mensajes / errores si es que existen #}
+                    {% with mensajes_flash = get_flashed_messages() %}
+                    {% if mensajes_flash %}
+                    <div class="notification is-danger mt-2">
+                        {% for mensaje in mensajes_flash %}
+                        <li>{{ mensaje }}</li>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

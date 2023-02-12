@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+{% include '/components/head.html' %}
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+
+</div>
+
+<head>
+    <style>
+        .containerDate {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .containerChart {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .containerChartI {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    {% include '/components/menubar.html' %}
+
+    <div class="container">
+        <div>
+            <br>
+            <div>
+                <div class="containerDate">
+                    <div style="width: 50%; margin-top: -1%;">
+                        <label style="color: white; font-size: 50px; font-weight: bold;">Dashboard</label>
+
+                    </div>
+                    <div>
+                        <form action="/inicio" method='POST' name="myform">
+                            <div class="containerDate" style="width: 100%;">
+                                <div style="width: 100%; text-align: end; display: flex; margin-left: -23%;">
+                                    {{ form.csrt_token }}
+                                    <div style="margin-top: 1.5%; color: white;">
+                                        {{ form.startdate.label }} {{form.startdate(class='datepicker')}}
+                                        {{form.hidden_tag()}}
+
+                                    </div>
+                                    <div style="margin-left: 3%; margin-top: 1.5%; color: white;">
+                                        {{ form.enddate.label }} {{form.enddate(class='datepicker')}}
+                                        {{form.hidden_tag()}}
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <input type="submit"
+                                        class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                                        style="background-color: #1A5276" value="Filtrar">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="containerChart">
+                        <div class=”example” style="height: 40vh; width: 50%; background-color: white;">
+
+                            <canvas id="myChart1"></canvas>
+
+
+
+                        </div>
+
+                        <div class=”example”
+                            style="height: 40vh; width: 49%; background-color: white; margin-left: 1%;">
+                      
+                                <canvas id="myChart2"></canvas>
+                    
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1%;">
+                    <div class="containerChartI">
+                        <div class=”example” style="height: 50vh; width: 100%; background-color: white;">
+                            <div style="margin-top: 4%; width: 85%; height: 78%; margin-left: 7%;">
+                                <canvas style="height: 120px;" id="myChart3"></canvas>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <script>
+                    const labels_g1 = {{ labels_g1 | tojson}};
+
+                    const data_g1 = {
+                        labels: labels_g1,
+                        datasets: [{
+                            backgroundColor: ['rgb(128, 255, 219)',
+                                'rgb(187, 208, 255)',
+                                'rgb(254, 200, 154)',
+                                'rgb(239, 241, 237)'],
+                            borderColor: ['rgb(6, 214, 160)',
+                                'rgb(187, 208, 255)',
+                                'rgb(254, 200, 154)',
+                                'rgb(239, 241, 237)'],
+                            data: {{ data_g1 | tojson}},
+                                }]
+                            };
+
+                    const config = {
+                        type: 'bar',
+                        data: data_g1,
+                        options: {
+                            maintainAspectRatio: false,
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Cantidad de Alertas"
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    const myChart = new Chart(
+                        document.getElementById('myChart1'),
+                        config
+                    );
+
+                    const labels_g2 = {{ labels_g2 | tojson}};
+
+                    const data_g2 = {
+                        labels: labels_g2,
+                        datasets: [{
+                            label: 'Total de alarmas por nivel',
+                            backgroundColor: ['rgb(255, 99, 132)',
+                                'rgb(255, 205, 86)',],
+                            borderColor: ['rgb(255, 99, 132)',
+                                'rgb(255, 205, 86)',],
+                            data: {{ data_g2 | tojson}},
+                                }]
+                            };
+
+                    const config2 = {
+                        type: 'doughnut',
+                        data: data_g2,
+                        options: {
+                            maintainAspectRatio: false,
+                            title: {
+                                display: true,
+                                text: "Cantidad de alertas por nivel"
+                            }
+                        }
+                    };
+
+                    const myChart2 = new Chart(
+                        document.getElementById('myChart2'),
+                        config2
+                    );
+
+                    const labels_g3 = {{ labels_g3 | tojson}};
+
+                    const data_g3 = {
+                        labels: labels_g3,
+                        datasets: [{
+                            label: 'Cantidad de alarmas por fecha',
+                            backgroundColor: 'rgb(42, 113, 151)',
+                            borderColor: 'rgb(42, 113, 151)',
+                            data: {{ data_g3 | tojson}},
+                    fill: true,
+                                }]
+                            };
+
+                    const config3 = {
+                        type: 'line',
+                        data: data_g3,
+                        options: {
+                            maintainAspectRatio: false,
+                            legend: { display: true },
+                            title: {
+                                display: true,
+                                text: "Cantidad de Alertas por fecha"
+                            }
+                        }
+                    };
+
+                    const myChart3 = new Chart(
+                        document.getElementById('myChart3'),
+                        config3
+                    );
+
+                </script>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

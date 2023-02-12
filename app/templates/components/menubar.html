@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand navbar-light bg-black">
+    <div class="nav navbar-nav">
+        <a class="nav-item nav-link active text-light font-monospace" href="{{ url_for( 'Inicio')}}">Inicio </a>
+        <a class="nav-item nav-link active text-light font-monospace" href="{{ url_for( 'Dispositivos')}}">Dispositivos
+        </a>
+        <a class="nav-item nav-link active text-light font-monospace" href="{{ url_for( 'Alarmas')}}">Alarmas </a>
+        {% if session['usuario'] == "admin" %}
+        <a class="nav-item nav-link active text-light font-monospace"
+            href="{{ url_for( 'Configuracion')}}">Configuración </a>
+        {% endif %}
+    </div>
+</nav>

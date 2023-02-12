@@ -1,0 +1,54 @@
+<head>
+    <style>
+        .float-parent-element {
+            width: 100%;
+        }
+
+        .float-child-element {
+            float: left;
+            width: 50%;
+        }
+
+        .left {
+            margin-left: 3%;
+        }
+
+        .right {
+            float: left;
+            margin-left: 22%;
+        }
+
+        .white {
+            filter: invert(100%);
+
+        }
+    </style>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/Cubo.ico')}}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <div class="float-parent-element" style="margin-top: 1%;">
+        <div class="float-child-element">
+            <div class="left">
+                <img src="https://jorzgz0iptpc.cdn.shift8web.com/wp-content/uploads/2018/01/LOGO-UISRAEL-768x209.png"
+                    width="300" height="70" align="left up">
+            </div>
+        </div>
+        <div>
+            <div class="right">
+                <h2 class="display-3">Net-Cube <img src="{{ url_for('static', filename = 'img/Cubo.png')}}" width="70"
+                        height="70"></h2>
+            </div>
+        </div>
+    </div>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Inicio </title>
+    <!-- Bootstrap CSS v5.2.0-beta1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/base1.css')}}">
+    {% if session['usuario'] %}
+    <p><a href="{{ url_for( 'logout')}}"><img class="white" src="{{ url_for('static', filename = 'img/logout.svg')}}"
+                style="width:30px;height:30px;margin-top: 1.5%; margin-left: 1.5%;"></a></p>
+    {% endif %}
+</head>

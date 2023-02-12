@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+{% include '/components/head.html' %}
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+    <div class="container">
+    </div>
+</div>
+
+
+<body>
+    {% include '/components/menubar.html' %}
+
+    <div class="container">
+        <div class="scanner">
+            <br>
+            <div>
+                {% if menuAgregarUsuario %}
+                {% if usuario%}
+                <h1>Edite la información del usuario:</h1>
+                <form action="/editarUsuario" method="post">
+                    <div class="form-group">
+                        <label for="name">Correo: </label>
+                        <input class="form-control" type="text" style="width:300px;height:50px" name="id" value={{
+                            usuario[0]}} hidden={{True}}>
+                        <input class="form-control" type="text" style="width:300px;height:50px" name="correo" value={{
+                            usuario[1]}}>
+                        <label for="name">Password: </label>
+                        <input class="form-control" type="text" style="width:300px;height:50px" name="password" value={{
+                            usuario[2]}}>
+                        <br>
+                        <input type="submit" class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                            style="background-color: #1A5276" value="Aceptar">
+                    </div>
+                </form>
+                {% else %}
+                <h1>Ingrese la información del nuevo usuario:</h1>
+                <form action="/agregarUsuario" method="post">
+                    <div class="form-group">
+                        <label for="name">Correo: </label>
+                        <input class="form-control" type="text" style="width:300px;height:50px" name="correo" value="">
+                        <label for="name">Password: </label>
+                        <input class="form-control" type="text" style="width:300px;height:50px" name="password"
+                            value="">
+                        <br>
+                        <input type="submit" class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                            style="background-color: #1A5276" value="Agregar">
+                    </div>
+                </form>
+                {% endif %}
+                <br>
+                <br>
+                {% else %}
+                <div>
+                    <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                        style="background-color: #1A5276" href="{{ url_for( 'VerUsuarios', menuAgregarUsuario = True)}}"
+                        role="button" value="none">Agregar Usuario</a>
+                </div>
+                {% endif %}
+            </div>
+            <h1>Usuarios registrados en netcube:</h1>
+            <table class="table bg-white font-monospace">
+
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>Password</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.1}}</td>
+                        <td>{{ usuario.2}}</td>
+                        <td>
+                            <form action="/editUser" method="get">
+                                <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                                    style="background-color: #1A5276"
+                                    href="{{ url_for( 'VerUsuarios', usuario = usuario, menuAgregarUsuario=True)}}"
+                                    role="button" value="none">Editar</a>
+                            </form>
+                            <form action="/deleteUser" method="get">
+                                <a name="info" class="btn btn-succes border-dark text-light font-monospace"
+                                    style="background-color: #1A5276"
+                                    href="{{ url_for( 'EliminarUsuario', id_usuario = usuario.0)}}" role="button"
+                                    value="none">Eliminar</a>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

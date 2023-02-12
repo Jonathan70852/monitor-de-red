@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+{% include '/components/head.html' %}
+
+
+<body>
+    {% include '/components/menubar.html' %}
+
+    <nav class="container">
+
+        <h1>Informacion del dispositivo: </h1>
+
+        <table class="table bg-white font-monospace">
+
+            {% for informe in us %}
+
+            <tbody>
+                <tr>
+                    <td><b>Dispositivo:</td>
+                    <td>{{ informe.Dispositivo}}</td>
+                </tr>
+                <tr>
+                    <td><b>Sistema:</td>
+                    <td>{{ informe.Sistema}}</td>
+                </tr>
+                {# <tr>
+                    <td><b>Tiempo de Conexión:</td>
+                    <td>{{ informe.Tiempo_conexion}}</td>
+                </tr> #}
+                <tr>
+                    <td><b>Grupo de Red: </td>
+                    <td>{{ informe.Grupo_red}}</td>
+                </tr>
+                <tr>
+                    <td><b>Contacto:</td>
+                    <td>{{ informe.Contacto}}</td>
+                </tr>
+                <tr>
+                    <td><b>OID:</td>
+                    <td>{{ informe.OID}}</td>
+                </tr>
+                <tr>
+                    <td><b>Tarjeta de Red:</td>
+                    <td>{{ informe.Tarjeta_red}}</td>
+                </tr>
+                {# <tr>
+                    <td><b>RAM:</td>
+                    <td>{{ informe.RAM}}</td>
+                </tr>
+                <tr>
+                    <td><b>HDD:</td>
+                    <td>{{ informe.HDD}}</td>
+                </tr> #}
+                <tr>
+                    <td><b>Particiones:</td>
+                    <td>{{ informe.Particiones}}</td>
+                </tr>
+                {# <tr>
+                    <td><b>MAC:</td>
+                    <td>{{ informe.MAC}}</td>
+                </tr> #}
+                <tr>
+                    <td><b>IP:</td>
+                    <td>{{ informe.IP}}</td>
+                </tr>
+                <tr>
+                    <td><b>Velocidad de Conexión (Ethernet/Mbps):</td>
+                    <td>{{ informe.Mbps_Ethernet}}</td>
+                </tr>
+                <tr>
+                    <td><b>Velocidad de Conexión (Wifi/Mbps):</td>
+                    <td>{{ informe.Mbps_wifi}}</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        </div>
+
+        </div>
+        </div>
+
+
+        <!-- JS, Popper.js, and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
+
+
+<tr>
+    <th></th>
+
+
+</tr>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+{% include '/components/head.html' %}
+
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+    <div class="container">
+    </div>
+</div>
+
+<head>
+    <style>
+        .containerHead {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    {% include '/components/menubar.html' %}
+
+    <br>
+    <div class="container">
+        <div>
+            <form action="/usuarios" method="get">
+
+                <div class="containerHead">
+                    
+                    <div style="width: 70%;">
+                        <label style="color: white; font-size: 50px; font-weight: bold;">Variables de configuración del sistema</label>
+                    </div>
+                    <div style="width: 30%; text-align: end; margin-top: 1%;">
+                        <input type="submit" class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                            style="background-color: #1A5276" value="VER USUARIOS">
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+        <div class="scanner">
+          
+            <form action="/update-system-configurations" method="post">
+                <div class="form-group">
+                    <br>
+                    <label style="color: white;" for="name">Correo de destino: </label>
+                    <input class="form-control" type="text" style="width:300px;height:50px" name="email_receiver"
+                        value="{{configuracion.1}} ">
+                    <label style="color: white;" for="name">Correo remitente: </label>
+                    <input class="form-control" type="text" style="width:300px;height:50px" name="email_sender"
+                        value="{{configuracion.2}}">
+                    <label style="color: white;" for="name">Contraseña de correo: </label>
+                    <input class="form-control" type="text" style="width:300px;height:50px" name="email_password"
+                        value="{{configuracion.3}}">
+                    <label style="color: white;" for="name">Intervalo de segundo: </label>
+                    <input class="form-control" type="text" style="width:300px;height:50px" name="seconds_interval"
+                        value="{{configuracion.4}}">
+                    <br>
+                    
+                    <em style="color: white;">Estado de alertas del sistema</em>
+
+                    <li><label style="color: white;" for="name">Alerta Hard Disk </label>
+                        <input style="width: 20px; height: 20px; accent-color: green;" type="checkbox" name="hardDisk_alert" value{{configuracion.5}} {{'checked' if configuracion.5 == 1 else ''}}></li>
+                    <li><label style="color: white;" for="name">Alerta Wifi </label>
+                        <input style="width: 20px; height: 20px; accent-color: green;" type="checkbox" name="wifi_alert" value{{configuracion.6}} {{'checked' if configuracion.6 == 1 else ''}}></li>
+                    <li>
+                        <label style="color: white;" for="name">Alerta Ethernet </label>
+                        <input style="width: 20px; height: 20px; accent-color: green;" type="checkbox" name="ethernet_alert" value{{configuracion.7}} {{'checked' if configuracion.7 == 1 else ''}}></li>
+                    <li>
+                        <label style="color: white;" for="name">Alerta Desconexión </label>
+                        <input style="width: 20px; height: 20px; accent-color: green;" type="checkbox" name="disconnect_alert" value{{configuracion.8}} {{'checked' if configuracion.8 == 1 else ''}}></li>
+                    <br>
+                    <em style="color: white;">La modificación del intervalo de tiempo de monitorización (segundos) hará efecto luego de
+                        reiniciar el servidor.</em>
+                    <br>
+                    <br>
+                    <input type="submit" class="btn btn-success btn-lg bg-#CB4335  border-dark font-monospace"
+                        style="background-color: #1A5276" value="ACTUALIZAR">
+                </div>
+            </form>
+
+        </div>
+
+        <p>
+
+    </div>
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

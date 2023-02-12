@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include '/components/head.html' %}
+
+<div class="p-5 bg-#3498DB" style="margin-top: -3%;">
+    <div class="container">
+
+        <h2 class="display-3">Net-Cube <img src="{{ url_for('static', filename = 'img/Cubo.png')}}" width="250"
+                height="250"></h2>
+
+
+    </div>
+</div>
+
+
+<body>
+
+    {% include '/components/menubar.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% block contenido %} {% endblock %}
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
